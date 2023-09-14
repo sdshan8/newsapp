@@ -1,8 +1,20 @@
 import React, { Component } from 'react'
 import Newsitems from './Newsitems'
 import Spinner from './Spinner'
+import PropTypes from 'prop-types'
 
 export class News extends Component {
+  static defaultProps = {
+    country: 'in',
+    pageSize: 8,
+    category: "general"
+  }
+  static propTypes = {
+    country: PropTypes.string,
+    pageSize: PropTypes.number,
+    category: PropTypes.string,
+  }
+
   constructor(){
     super()
     this.state = {
@@ -13,7 +25,7 @@ export class News extends Component {
   }
   async componentDidMount(){
       this.setState({loading: true})
-      let url = `https://newsapi.org/v2/top-headlines?country=in&apikey=${process.env.REACT_APP_NEWSAPI_KEY}&pageSize=${this.props.pageSize}`;
+      let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apikey=${process.env.REACT_APP_NEWSAPI_KEY}&pageSize=${this.props.pageSize}`;
       let data = await fetch(url);
       let parsedData = await data.json()
       this.setState({
@@ -25,7 +37,7 @@ export class News extends Component {
     if (this.state.page + 1 > Math.ceil(this.state.articles.totalResults/this.props.pageSize)) {
     } else {
       this.setState({loading: true})
-      let url = `https://newsapi.org/v2/top-headlines?country=in&apikey=${process.env.REACT_APP_NEWSAPI_KEY}&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
+      let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apikey=${process.env.REACT_APP_NEWSAPI_KEY}&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
       let data = await fetch(url);
       let parsedData = await data.json()
       this.setState({
@@ -36,7 +48,7 @@ export class News extends Component {
     }
   } 
   handlePrevClick = async() => {
-    let url = `https://newsapi.org/v2/top-headlines?country=in&apikey=${process.env.REACT_APP_NEWSAPI_KEY}&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apikey=${process.env.REACT_APP_NEWSAPI_KEY}&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`;
     this.setState({loading: true})
     let data = await fetch(url);
     let parsedData = await data.json()

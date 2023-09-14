@@ -19,6 +19,21 @@ export class NavBar extends Component {
                 <li className="nav-item">
                   <a className="nav-link" href="/about">About</a>
                 </li>
+                <li className="nav-item dropdown">
+                  {/*eslint-disable-next-line*/}
+                  <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Categories
+                  </a>
+                  <ul className="dropdown-menu">
+                    <li><a className="dropdown-item" href="/general">General</a></li>
+                    <li><a className="dropdown-item" href="/science">Science</a></li>
+                    <li><a className="dropdown-item" href="/biz">Business</a></li>
+                    <li><a className="dropdown-item" href="/entertainment">Entertainment</a></li>
+                    <li><a className="dropdown-item" href="/health">Health</a></li>
+                    <li><a className="dropdown-item" href="/sports">Sports</a></li>
+                    <li><a className="dropdown-item" href="/tech">Technology</a></li>
+                  </ul>
+                </li>
               </ul>
             </div>
           </div>
